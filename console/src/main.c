@@ -1,8 +1,9 @@
 // Copyright 2025 JesusTouchMe
 
-#include <windows.h>
 #include <infra/ipc.h>
 #include <infra/protocols/ipc_packet.h>
+
+#include <unistd.h>
 
 int main(int argc, char** argv) {
     if (argc < 2) {
@@ -10,8 +11,8 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    Sleep(5000);
 
+    sleep(1);
     const char* command_prefix = argv[1];
 
     ipc_client_t client = ipc_client_connect("baadf00d");
