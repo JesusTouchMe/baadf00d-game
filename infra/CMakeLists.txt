@@ -1,16 +1,18 @@
 cmake_minimum_required(VERSION 3.29)
 
 set(SOURCES
-        src/ipc_client.c
-        src/ipc_server.c)
+        src/ipc.c
+    src/protocols/ipc_packet.c
+)
 
 set(HEADERS
-        include/ipc.h)
+    include/infra/ipc.h
+    include/infra/protocols/ipc_packet.h)
 
 source_group(TREE ${PROJECT_SOURCE_DIR} FILES ${SOURCES} ${HEADERS})
 
-add_executable(baadf00d-infra ${SOURCES} ${HEADERS})
-add_executable(baadf00d::infra ALIAS baadf00d-infra)
+add_library(baadf00d-infra ${SOURCES} ${HEADERS})
+add_library(baadf00d::infra ALIAS baadf00d-infra)
 
 target_include_directories(baadf00d-infra
     PUBLIC

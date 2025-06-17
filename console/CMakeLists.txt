@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.29)
 
+include(CheckIPOSupported)
+check_ipo_supported(RESULT supported OUTPUT error)
+
 set(SOURCES
         src/main.c)
 
@@ -34,3 +37,5 @@ elseif(UNIX AND NOT APPLE)
 endif()
 
 set_property(TARGET baadf00d-console PROPERTY C_STANDARD 23)
+
+target_link_libraries(baadf00d-console baadf00d::infra)
