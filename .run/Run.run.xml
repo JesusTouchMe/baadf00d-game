@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run" type="CompoundRunConfigurationType">
+    <toRun name="baadf00d-console" targetId="CMakeBuildProfile:Debug" type="CMakeRunConfiguration" />
+    <toRun name="baadf00d-core" targetId="CMakeBuildProfile:Debug" type="CMakeRunConfiguration" />
+    <method v="2" />
+  </configuration>
+</component>
