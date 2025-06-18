@@ -3,11 +3,16 @@ cmake_minimum_required(VERSION 3.29)
 set(SOURCES
         src/ipc.c
     src/protocols/ipc_packet.c
+        src/thread.c
+        src/process.c
 )
 
 set(HEADERS
     include/infra/ipc.h
-    include/infra/protocols/ipc_packet.h)
+    include/infra/protocols/ipc_packet.h
+        include/infra/thread.h
+        include/infra/process.h
+        include/infra/structures.h)
 
 source_group(TREE ${PROJECT_SOURCE_DIR} FILES ${SOURCES} ${HEADERS})
 

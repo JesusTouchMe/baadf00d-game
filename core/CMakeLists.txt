@@ -4,9 +4,11 @@ include(CheckIPOSupported)
 check_ipo_supported(RESULT supported OUTPUT error)
 
 set(SOURCES
-        src/main.c)
+        src/main.c
+        src/ipc_server_handler.c)
 
-set(HEADERS)
+set(HEADERS
+        include/ipc_server_handler.h)
 
 source_group(TREE ${PROJECT_SOURCE_DIR} FILES ${SOURCES} ${HEADERS})
 

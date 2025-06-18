@@ -1,7 +1,9 @@
 // Copyright 2025 JesusTouchMe
 
-#include <infra/ipc.h>
 #include <infra/protocols/ipc_packet.h>
+
+#include <infra/ipc.h>
+#include <infra/thread.h>
 
 #include <unistd.h>
 
@@ -12,7 +14,7 @@ int main(int argc, char** argv) {
     }
 
 
-    sleep(1);
+    thread_sleep(1000);
     const char* command_prefix = argv[1];
 
     ipc_client_t client = ipc_client_connect("baadf00d");
