@@ -6,7 +6,8 @@ check_ipo_supported(RESULT supported OUTPUT error)
 set(SOURCES
         src/main.c)
 
-set(HEADERS)
+set(HEADERS
+        include/ipc_packet_handler.h)
 
 source_group(TREE ${PROJECT_SOURCE_DIR} FILES ${SOURCES} ${HEADERS})
 

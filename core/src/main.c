@@ -5,6 +5,8 @@
 #include <infra/ipc.h>
 
 int main(int argc, char** argv) {
+    ipc_server_handler_init();
+
     ipc_server_t server = ipc_server_create("baadf00d");
     if (server == nullptr) {
         printf("Failed to create server: %s\n", ipc_last_error());
