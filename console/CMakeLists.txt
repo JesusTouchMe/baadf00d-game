@@ -11,32 +11,36 @@ set(HEADERS
 
 source_group(TREE ${PROJECT_SOURCE_DIR} FILES ${SOURCES} ${HEADERS})
 
-add_executable(baadf00d-console ${SOURCES} ${HEADERS})
+add_executable(console ${SOURCES} ${HEADERS})
 
-target_include_directories(baadf00d-console
+target_include_directories(console
     PUBLIC
         include
+)
+
+set_target_properties(console PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/out/bin
 )
 
 if(${CMAKE_BUILD_TYPE} MATCHES Release|RelWithDebInfo)
     if(supported)
         message(STATUS "enabling lto")
-        set_target_properties(baadf00d-console PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+        set_target_properties(console PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
     elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-        target_compile_options(baadf00d-console PRIVATE -O3 -march=native)
+        target_compile_options(console PRIVATE -O3 -march=native)
     elseif(MSVC)
-        target_compile_options(baadf00d-console PRIVATE /O2 /arch:AVX2)
+        target_compile_options(console PRIVATE /O2 /arch:AVX2)
     endif()
 endif()
 
 if(WIN32)
-    target_compile_definitions(baadf00d-console PUBLIC PLATFORM_WINDOWS)
+    target_compile_definitions(console PUBLIC PLATFORM_WINDOWS)
 elseif(APPLE)
-    target_compile_definitions(baadf00d-console PUBLIC PLATFORM_MACOS)
+    target_compile_definitions(console PUBLIC PLATFORM_MACOS)
 elseif(UNIX AND NOT APPLE)
-    target_compile_definitions(baadf00d-console PUBLIC PLATFORM_LINUX)
+    target_compile_definitions(console PUBLIC PLATFORM_LINUX)
 endif()
 
-set_property(TARGET baadf00d-console PROPERTY C_STANDARD 23)
+set_property(TARGET console PROPERTY C_STANDARD 23)
 
-target_link_libraries(baadf00d-console baadf00d::infra)
+target_link_libraries(console infra)

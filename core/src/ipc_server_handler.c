@@ -2,8 +2,6 @@
 
 #include "ipc_server_handler.h"
 
-#include <infra/protocols/ipc_packet.h>
-
 #include <infra/thread.h>
 
 #include <stdlib.h>

@@ -3,6 +3,8 @@
 #ifndef CORE_IPC_SERVER_HANDLER_H
 #define CORE_IPC_SERVER_HANDLER_H 1
 
+#include <infra/protocols/ipc_packet.h>
+
 #include <infra/ipc.h>
 
 void ipc_server_handler_init(void);

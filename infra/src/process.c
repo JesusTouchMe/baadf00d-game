@@ -58,7 +58,7 @@ static void* build_environment(struct array_of_string_pairs env) {
 }
 
 process_t process_create(const char* name, const char* cwd, struct array_of_strings args, struct array_of_string_pairs env, bool new_console) {
-    STARTUPINFOA si { sizeof(si) };
+    STARTUPINFOA si = { sizeof(si) };
     DWORD flags = new_console ? CREATE_NEW_CONSOLE : 0;
 
     char* command = build_command_line(name, args);
