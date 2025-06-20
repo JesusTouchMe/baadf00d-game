@@ -131,11 +131,13 @@ void process_destroy(process_t process) {
 #include <signal.h>
 #include <unistd.h>
 
+#include <string.h>
+
 struct process {
     pid_t pid;
 };
 
-process_t process_create(const char* name, const char* cwd, struct array_of_strings args, struct array_of_strings env, bool new_console) {
+process_t process_create(const char* name, const char* cwd, struct array_of_strings args, struct array_of_string_pairs env, bool new_console) {
     process_t process = malloc(sizeof(struct process));
     if (process == nullptr) return nullptr;
 
@@ -147,13 +149,29 @@ process_t process_create(const char* name, const char* cwd, struct array_of_stri
         if (new_console) setsid();
 
         const char** new_args = malloc(sizeof(char*) * (args.length + 2));
+        if (new_args == nullptr) _exit(127);
         new_args[0] = name;
         for (size_t i = 0; i < args.length; i++) {
             new_args[i + 1] = args.strings[i];
         }
         new_args[args.length + 1] = nullptr;
 
-        execvp(name, new_args);
+        char** new_env = malloc(sizeof(char*) * (env.length + 1));
+        if (new_env == nullptr) _exit(127);
+        for (size_t i = 0; i < env.length; i++) {
+            size_t length = strlen(env.keys[i]) + strlen(env.values[i]) + 2;
+            new_env[i] = malloc(length);
+            snprintf(new_env[i], length, "%s=%s", env.keys[i], env.values[i]);
+        }
+        new_env[env.length] = nullptr;
+
+        execve(name, (char* const*) new_args, new_env);
+
+        for (size_t i = 0; i < env.length; i++) {
+            free(new_env[i]);
+        }
+        free(new_env);
+        free(new_args);
 
         _exit(127);
     }
