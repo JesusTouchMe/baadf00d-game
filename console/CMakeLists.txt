@@ -4,11 +4,12 @@ include(CheckIPOSupported)
 check_ipo_supported(RESULT supported OUTPUT error)
 
 set(SOURCES
-        src/main.c)
+        src/main.c
+)
 
 set(HEADERS
-        include/ipc_packet_handler.h)
-
+        include/ipc_packet_handler.h
+)
 source_group(TREE ${PROJECT_SOURCE_DIR} FILES ${SOURCES} ${HEADERS})
 
 add_executable(console ${SOURCES} ${HEADERS})

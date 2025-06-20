@@ -1,10 +1,14 @@
 cmake_minimum_required(VERSION 3.29)
 
+include(CheckIPOSupported)
+check_ipo_supported(RESULT supported OUTPUT error)
+
 set(SOURCES
         src/ipc.c
     src/protocols/ipc_packet.c
         src/thread.c
         src/process.c
+        src/module.c
 )
 
 set(HEADERS
@@ -13,12 +17,12 @@ set(HEADERS
         include/infra/thread.h
         include/infra/process.h
         include/infra/structures.h
-    include/infra/compiler_and_platform.h)
+    include/infra/compiler_and_platform.h
+        include/infra/module.h)
 
 source_group(TREE ${PROJECT_SOURCE_DIR} FILES ${SOURCES} ${HEADERS})
 
 add_library(infra SHARED ${SOURCES} ${HEADERS})
-add_library(baadf00d::infra ALIAS infra)
 
 target_include_directories(infra
     PUBLIC

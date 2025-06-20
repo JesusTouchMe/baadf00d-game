@@ -1,0 +1,6 @@
+// Copyright 2025 JesusTouchMe
+
+#ifndef ENGINE_CORE_GAME_LOOP_H
+#define ENGINE_CORE_GAME_LOOP_H 1
+
+#endif //ENGINE_CORE_GAME_LOOP_H
